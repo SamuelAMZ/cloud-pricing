@@ -1,0 +1,41 @@
+@import "../global/variables";
+
+.providers-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+
+  .item {
+    cursor: pointer;
+  }
+
+  .provider {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    min-width: 100px;
+    border-radius: 10px;
+    font-size: 40px;
+    pointer-events: none;
+
+    &:last-child {
+      font-size: 30px;
+    }
+    &#active {
+      box-shadow: 0 0 2px 7px rgba(66, 63, 255, 0.272);
+    }
+  }
+
+  p {
+    text-align: center;
+    text-transform: capitalize;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    pointer-events: none;
+    font-size: 15px;
+  }
+}

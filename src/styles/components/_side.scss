@@ -1,0 +1,19 @@
+@import "../global/variables";
+
+.side {
+  background-color: rgb(229, 229, 229);
+  min-height: 100%;
+  width: 100%;
+  color: black;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .side-container {
+    width: 90%;
+    height: 90%;
+    overflow: auto;
+    padding: 0 1rem 0 0;
+  }
+}

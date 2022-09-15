@@ -1,0 +1,72 @@
+@import "../global/variables";
+
+.main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-right: 25%;
+
+  .heaading {
+    margin-bottom: 2rem;
+    h2 {
+      font-size: 30px;
+      line-height: 1.5;
+    }
+    p {
+      color: hsla(0, 0%, 100%, 0.397);
+      line-height: 1;
+      font-size: 15px;
+    }
+  }
+
+  .search {
+    margin-bottom: 4rem;
+    width: 100%;
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      color: rgba(194, 194, 194, 0.786);
+      font-size: 20px;
+      background-color: rgba(245, 245, 245, 0.125);
+      border-radius: 10px;
+      overflow: hidden;
+
+      .icon {
+        padding: 0 0.3rem 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      input {
+        padding: 0.5rem;
+        font-size: 15px;
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        font-weight: 600;
+        color: rgba(194, 194, 194, 0.786);
+      }
+    }
+  }
+
+  .main-providers {
+    .title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      span {
+        color: rgba(194, 194, 194, 0.786);
+        font-size: 12px;
+      }
+    }
+  }
+}

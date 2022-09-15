@@ -1,0 +1,36 @@
+@import "../global/variables";
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  .computer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+
+      .details {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .datacomputer {
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+
+      justify-content: center;
+    }
+    .data {
+      text-transform: capitalize;
+    }
+  }
+}
