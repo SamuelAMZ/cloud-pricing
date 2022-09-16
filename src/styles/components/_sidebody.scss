@@ -14,23 +14,95 @@
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
+      margin-bottom: 1rem;
 
       .details {
         display: flex;
         gap: 1rem;
         align-items: center;
         justify-content: center;
+        font-size: 15px;
+
+        p {
+          font-size: 15px;
+        }
+
+        form {
+          select {
+            padding: 0.1rem 0.5rem;
+            text-transform: capitalize;
+            font-size: 15px;
+            border-radius: 5px;
+            background-color: $primary-color;
+            color: white;
+            border: none;
+
+            option {
+              border: none;
+            }
+          }
+        }
       }
     }
 
     .datacomputer {
       display: grid;
-      grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr;
 
       justify-content: center;
     }
     .data {
       text-transform: capitalize;
+
+      div {
+        p {
+          margin-bottom: 0.5rem;
+          padding-bottom: 0.5rem;
+          border-bottom: 1px solid rgba(79, 79, 79, 0.135);
+          font-size: 15px;
+
+          &:first-child {
+            border-bottom: 1px solid black;
+            font-weight: 600;
+          }
+        }
+      }
+      .name {
+        p {
+          color: $primary-color;
+          &:first-child {
+            color: black;
+          }
+        }
+      }
+      .logo {
+        p {
+          svg {
+            margin-bottom: -2px;
+          }
+        }
+      }
+    }
+
+    .next-actions {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: 1rem;
+
+      button {
+        padding: 0.1rem 0.5rem;
+        text-transform: capitalize;
+        font-size: 15px;
+        border-radius: 5px;
+        background-color: #03a376;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      p {
+        font-size: 15px;
+      }
     }
   }
 }

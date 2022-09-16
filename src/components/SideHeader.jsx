@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import ActiveProviderContext from "../context/ActiveProvider";
 import { HiDownload } from "react-icons/hi";
 
 const SideHeader = () => {
+  const { active } = useContext(ActiveProviderContext);
+
   return (
     <div className="side-header">
       <div className="title">
-        <h2>Linode</h2>
+        <h2>{active.full}</h2>
         <div className="underline">
           <span></span>
           <span></span>
