@@ -6,10 +6,12 @@ import { SiGooglecloud, SiOvh, SiVultr } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import ActiveProviderContext from "../context/ActiveProvider";
 import DefaultCompContext from "../context/DefaultCompType";
+import PricetypeContext from "../context/PriceType";
 
 const SideBody = () => {
   const { active } = useContext(ActiveProviderContext);
   const { defaultComp, changeDefaultComp } = useContext(DefaultCompContext);
+  const { pricetype, changePricetype } = useContext(PricetypeContext);
 
   const {
     currentData: providerdata,
@@ -17,7 +19,7 @@ const SideBody = () => {
     isLoading,
   } = useGetData(active.url);
 
-  // handle type of computer changes from select
+  // // handle type of computer changes from select
   const [typeOfComputer, setTypeOfComputer] = useState(defaultComp);
 
   const takeComputerType = () => {
@@ -38,7 +40,7 @@ const SideBody = () => {
     }
   };
   // handle type of price from select
-  const [typeOfPrice, setTypeOfPrice] = useState("permo");
+  // const [typeOfPrice, setTypeOfPrice] = useState("permo");
   // handle the displaying of a max of 5 data on the first load
   const [maxComp, setMaxComp] = useState(5);
   const checkAndRemoveActions = () => {
@@ -48,11 +50,12 @@ const SideBody = () => {
   // trim too long data strings
   const trimData = (targetData) => {
     if (targetData.length >= 10) {
-      return targetData.slice(0, 10) + "...";
+      return targetData.slice(0, 9) + "...";
     } else {
       return targetData;
     }
   };
+  // set the price type
 
   return isLoading ? (
     <p>loading...</p>
@@ -83,10 +86,14 @@ const SideBody = () => {
             <form id="typeofprice">
               <select
                 name="price"
-                onChange={(e) => setTypeOfPrice(e.target.value)}
+                onChange={(e) => changePricetype(e.target.value)}
               >
-                <option value="permo">Price Per Month</option>
-                <option value="perho">Price Per Hour</option>
+                {active.pricePerMo && (
+                  <option value="permo">Price Per Month</option>
+                )}
+                {active.pricePerHo && (
+                  <option value="perho">Price Per Hour</option>
+                )}
               </select>
             </form>
           </div>
@@ -204,19 +211,16 @@ const SideBody = () => {
                 }
                 return (
                   <p key={id}>
-                    {typeOfPrice === "permo"
-                      ? data.pricePerMo
-                        ? trimData(data.pricePerMo) +
-                          " " +
-                          takeComputerType()[takeComputerType().length - 1]
-                            .currency
-                        : "Not Available"
-                      : data.pricePerHour
-                      ? trimData(data.pricePerHour) +
+                    {pricetype === "permo" &&
+                      trimData(data.pricePerMo) +
                         " " +
                         takeComputerType()[takeComputerType().length - 1]
-                          .currency
-                      : "Not Available"}
+                          .currency}
+                    {pricetype === "perho" &&
+                      data.pricePerHour +
+                        " " +
+                        takeComputerType()[takeComputerType().length - 1]
+                          .currency}
                   </p>
                 );
               })}

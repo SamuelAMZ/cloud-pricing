@@ -6,6 +6,7 @@ import { VscAzure } from "react-icons/vsc";
 import ActiveProviderContext from "../context/ActiveProvider";
 import IsLoadingContext from "../context/IsLoading";
 import DefaultCompContext from "../context/DefaultCompType";
+import PricetypeContext from "../context/PriceType";
 
 const Providers = () => {
   const providers = [
@@ -15,6 +16,8 @@ const Providers = () => {
       id: 1,
       color: "linear-gradient(to right, #8e2de2, #4a00e0)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/linode",
+      pricePerMo: true,
+      pricePerHo: true,
     },
     {
       name: "aws",
@@ -22,6 +25,8 @@ const Providers = () => {
       id: 2,
       color: "linear-gradient(to right, #ff416c, #ff4b2b)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/aws",
+      pricePerMo: true,
+      pricePerHo: false,
     },
     {
       name: "gcp",
@@ -29,6 +34,8 @@ const Providers = () => {
       id: 3,
       color: " linear-gradient(to right, #000428, #004e92)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/gcp",
+      pricePerMo: false,
+      pricePerHo: true,
     },
     {
       name: "azure",
@@ -36,6 +43,8 @@ const Providers = () => {
       id: 4,
       color: "linear-gradient(to right, #659999, #f4791f)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/azure",
+      pricePerMo: true,
+      pricePerHo: false,
     },
 
     {
@@ -44,6 +53,8 @@ const Providers = () => {
       id: 5,
       color: "linear-gradient(to right, #396afc, #2948ff)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/digitalOcean",
+      pricePerMo: true,
+      pricePerHo: true,
     },
     {
       name: "ovh cloud",
@@ -51,6 +62,8 @@ const Providers = () => {
       id: 6,
       color: "linear-gradient(to right, #59c173, #a17fe0, #5d26c1)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/ovh",
+      pricePerMo: false,
+      pricePerHo: true,
     },
     {
       name: "vultr",
@@ -58,12 +71,15 @@ const Providers = () => {
       id: 7,
       color: "linear-gradient(to right, #4e54c8, #8f94fb)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/vultr",
+      pricePerMo: true,
+      pricePerHo: true,
     },
   ];
 
   const { changeActive } = useContext(ActiveProviderContext);
   const { isLoading, changeLoading } = useContext(IsLoadingContext);
   const { defaultComp, changeDefaultComp } = useContext(DefaultCompContext);
+  const { pricetype, changePricetype } = useContext(PricetypeContext);
   let max = 0;
 
   const activer = (e, provider) => {
@@ -82,6 +98,13 @@ const Providers = () => {
       changeDefaultComp("computeData");
     } else {
       changeDefaultComp("general");
+    }
+    // change price type
+    if (provider.pricePerHo) {
+      changePricetype("perho");
+    }
+    if (provider.pricePerMo) {
+      changePricetype("permo");
     }
   };
 
