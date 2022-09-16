@@ -134,14 +134,14 @@ const SideBody = () => {
                     )}
                     {active.id === 5 && (
                       <>
-                        <SiOvh />
-                        <span> OVH</span>
+                        <FaDigitalOcean />
+                        <span> DigitalO</span>
                       </>
                     )}
                     {active.id === 6 && (
                       <>
-                        <FaDigitalOcean />
-                        <span> DO</span>
+                        <SiOvh />
+                        <span> OVH</span>
                       </>
                     )}
                     {active.id === 7 && (

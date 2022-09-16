@@ -128,8 +128,8 @@ const Providers = () => {
                 {provider.id === 2 && <FaAws />}
                 {provider.id === 3 && <SiGooglecloud />}
                 {provider.id === 4 && <VscAzure />}
-                {provider.id === 5 && <SiOvh />}
-                {provider.id === 6 && <FaDigitalOcean />}
+                {provider.id === 5 && <FaDigitalOcean />}
+                {provider.id === 6 && <SiOvh />}
                 {provider.id === 7 && <SiVultr />}
               </div>
               <p>{provider.name}</p>
