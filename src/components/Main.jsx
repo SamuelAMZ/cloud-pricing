@@ -31,7 +31,12 @@ const Main = () => {
         </div>
       </div>
 
-      {/* pore popup */}
+      <div className="layers">
+        <img className="layer1" src="/layers.png" alt="layers" />
+        <img className="layer2" src="/layers.png" alt="layers" />
+      </div>
+
+      {/* more popup */}
       {moreActive && <More />}
     </div>
   );
