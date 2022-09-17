@@ -39,8 +39,7 @@ const SideBody = () => {
       return providerdata.computer.cpuOptimized;
     }
   };
-  // handle type of price from select
-  // const [typeOfPrice, setTypeOfPrice] = useState("permo");
+
   // handle the displaying of a max of 5 data on the first load
   const [maxComp, setMaxComp] = useState(5);
   const checkAndRemoveActions = () => {
@@ -55,7 +54,13 @@ const SideBody = () => {
       return targetData;
     }
   };
-  // set the price type
+
+  useEffect(() => {
+    // set the default computer type to "general purposes"
+    setTypeOfComputer("general");
+    // reset the mexcomp to 5 every load of the component
+    setMaxComp(5);
+  }, [active]);
 
   return isLoading ? (
     <p>loading...</p>
