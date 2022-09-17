@@ -13,12 +13,12 @@ const Main = () => {
         <h2>Hi John</h2>
         <p>Lorem ipsum dolor sit amet</p>
       </div>
-      <div className="search">
+      <div className="search" onClick={() => changeMoreActive(true)}>
         <form>
           <div className="icon">
             <BiSearch />
           </div>
-          <input type="text" placeholder="Search for prices" />
+          <input type="text" placeholder="Search for prices" readOnly />
         </form>
       </div>
 
