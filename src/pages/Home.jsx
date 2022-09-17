@@ -5,6 +5,8 @@ import { ActiveProvider } from "../context/ActiveProvider";
 import { IsLoadingProvider } from "../context/IsLoading";
 import { DefaultCompProvider } from "../context/DefaultCompType";
 import { PricetypeProvider } from "../context/PriceType";
+import { MoreActiveProvider } from "../context/MoreIsActive";
+import { CurrentActiveProviderIdProvider } from "../context/CurrentActiveProviderId";
 
 const Home = () => {
   return (
@@ -13,8 +15,12 @@ const Home = () => {
         <IsLoadingProvider>
           <DefaultCompProvider>
             <PricetypeProvider>
-              <Main />
-              <Side />
+              <MoreActiveProvider>
+                <CurrentActiveProviderIdProvider>
+                  <Main />
+                  <Side />
+                </CurrentActiveProviderIdProvider>
+              </MoreActiveProvider>
             </PricetypeProvider>
           </DefaultCompProvider>
         </IsLoadingProvider>

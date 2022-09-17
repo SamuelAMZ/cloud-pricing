@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { BiSearch } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FaAws, FaLinode, FaDigitalOcean } from "react-icons/fa";
 import { SiGooglecloud, SiOvh, SiVultr } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
-import More from "./More";
 import ActiveProviderContext from "../context/ActiveProvider";
 import IsLoadingContext from "../context/IsLoading";
 import DefaultCompContext from "../context/DefaultCompType";
@@ -11,7 +11,16 @@ import PricetypeContext from "../context/PriceType";
 import MoreActiveContext from "../context/MoreIsActive";
 import CurrentActiveProviderIdContext from "../context/CurrentActiveProviderId";
 
-const Providers = () => {
+const More = () => {
+  const { moreActive, changeMoreActive } = useContext(MoreActiveContext);
+  const { changeActive } = useContext(ActiveProviderContext);
+  const { isLoading, changeLoading } = useContext(IsLoadingContext);
+  const { defaultComp, changeDefaultComp } = useContext(DefaultCompContext);
+  const { pricetype, changePricetype } = useContext(PricetypeContext);
+  const { currentActiveProviderId, changeCurrentActiveproviderId } = useContext(
+    CurrentActiveProviderIdContext
+  );
+
   const providers = [
     {
       name: "linode",
@@ -79,28 +88,17 @@ const Providers = () => {
     },
   ];
 
-  const { changeActive } = useContext(ActiveProviderContext);
-  const { isLoading, changeLoading } = useContext(IsLoadingContext);
-  const { defaultComp, changeDefaultComp } = useContext(DefaultCompContext);
-  const { pricetype, changePricetype } = useContext(PricetypeContext);
-  const { moreActive, changeMoreActive } = useContext(MoreActiveContext);
-  const { currentActiveProviderId, changeCurrentActiveproviderId } = useContext(
-    CurrentActiveProviderIdContext
-  );
-  let max = 0;
-
   const activer = (e, provider) => {
     // empty the id value of the other childrens
-    Array.from(e.target.parentElement.children).forEach((item) =>
-      item.children[0].removeAttribute("id")
-    );
-
-    // set new id value
+    Array.from(document.querySelectorAll(".provider")).forEach((item) => {
+      item.removeAttribute("id");
+    });
+    // // set the id
     Array.from(document.querySelectorAll(".provider")).forEach((item) => {
       let currentId = Number(item.getAttribute("data"));
       if (currentId === provider.id) {
         item.setAttribute("id", "active");
-        // set the current active provider id
+        // set the current active id
         changeCurrentActiveproviderId(currentId);
       }
     });
@@ -122,86 +120,67 @@ const Providers = () => {
     if (provider.pricePerMo) {
       changePricetype("permo");
     }
+    // close more box
+    changeMoreActive(false);
   };
 
-  // set the first provider as the default active data
   useEffect(() => {
-    document.querySelector(".item").children[0].setAttribute("id", "active");
-  }, []);
-
-  // disable a div when it s data is currently displayed on the app
-  useEffect(() => {
-    Array.from(document.querySelectorAll(".provider")).forEach((item) => {
-      // active the cursore event to all
-      item.parentElement.style.pointerEvents = "auto";
-      // disable the current one
+    Array.from(document.querySelectorAll(".more-provider")).forEach((item) => {
+      // console.log(item);
       if (Number(item.getAttribute("data")) === currentActiveProviderId) {
-        item.parentElement.style.pointerEvents = "none";
+        item.setAttribute("id", "active");
       }
     });
   }, [currentActiveProviderId]);
 
-  // disable all div when data is loading
-  useEffect(() => {
-    if (isLoading) {
-      Array.from(document.querySelectorAll(".provider")).forEach((item) => {
-        // disable all element when loading
-        item.parentElement.style.pointerEvents = "none";
-      });
-    }
-
-    Array.from(document.querySelectorAll(".provider")).forEach(
-      (item) => {
-        if (
-          !isLoading &&
-          Number(item.getAttribute("data")) !== currentActiveProviderId
-        ) {
-          item.parentElement.style.pointerEvents = "auto";
-        }
-      },
-      [isLoading]
-    );
-  });
-
   return (
-    <>
-      <div className="providers-container">
-        {providers.map((provider) => {
-          if (max <= 4) {
-            max++;
-            return (
-              <div
-                className="item"
-                key={provider.id}
-                onClick={(e) => activer(e, provider)}
-              >
-                <div
-                  style={{ background: provider.color }}
-                  className="provider"
-                  data={provider.id}
-                >
-                  {provider.id === 1 && <FaLinode />}
-                  {provider.id === 2 && <FaAws />}
-                  {provider.id === 3 && <SiGooglecloud />}
-                  {provider.id === 4 && <VscAzure />}
-                  {provider.id === 5 && <FaDigitalOcean />}
-                  {provider.id === 6 && <SiOvh />}
-                  {provider.id === 7 && <SiVultr />}
-                </div>
-                <p>{provider.name}</p>
-              </div>
-            );
-          }
-        })}
-        <div className="item" onClick={() => changeMoreActive(true)}>
-          <div className="provider" style={{ backgroundColor: "blue" }}>
-            <AiOutlinePlus />
+    <div className="more">
+      <div className="more-back" onClick={() => changeMoreActive(false)}></div>
+      <div className="more-content">
+        <div className="search more-search">
+          <form>
+            <div className="icon">
+              <BiSearch />
+            </div>
+            <input type="text" placeholder="Search for prices" />
+          </form>
+        </div>
+        <div className="main-providers">
+          <div className="title">
+            Providers <span>(15)</span>
           </div>
-          <p>More ...</p>
+          <div className="providers">
+            <div className="providers-container more-provider">
+              {providers.map((provider) => {
+                return (
+                  <div
+                    className="item more-item"
+                    key={provider.id}
+                    onClick={(e) => activer(e, provider)}
+                  >
+                    <div
+                      style={{ background: provider.color }}
+                      className="provider more-provider"
+                      data={provider.id}
+                    >
+                      {provider.id === 1 && <FaLinode />}
+                      {provider.id === 2 && <FaAws />}
+                      {provider.id === 3 && <SiGooglecloud />}
+                      {provider.id === 4 && <VscAzure />}
+                      {provider.id === 5 && <FaDigitalOcean />}
+                      {provider.id === 6 && <SiOvh />}
+                      {provider.id === 7 && <SiVultr />}
+                    </div>
+                    <p>{provider.name}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default Providers;
+export default More;

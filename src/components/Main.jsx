@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Providers from "./Providers";
+import More from "./More";
 import { BiSearch } from "react-icons/bi";
+import MoreActiveContext from "../context/MoreIsActive";
 
 const Main = () => {
+  const { moreActive, changeMoreActive } = useContext(MoreActiveContext);
+
   return (
     <div className="main">
       <div className="heaading">
@@ -26,6 +30,9 @@ const Main = () => {
           <Providers />
         </div>
       </div>
+
+      {/* pore popup */}
+      {moreActive && <More />}
     </div>
   );
 };
