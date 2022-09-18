@@ -23,10 +23,7 @@ const SideBody = () => {
   const [typeOfComputer, setTypeOfComputer] = useState(defaultComp);
 
   const takeComputerType = () => {
-    // console.log(defaultComp + new Date().getMilliseconds());
-
     if (typeOfComputer === "computeData" || defaultComp === "computeData") {
-      // console.log(providerdata.computer.computeData);
       return providerdata.computer.computeData;
     }
     if (typeOfComputer === "general") {

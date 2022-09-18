@@ -66,7 +66,7 @@ const More = () => {
     {
       name: "digital Ocn",
       full: "Digital Ocean",
-      tags: "digital ocean ocn digitalo",
+      tags: "digital ocean digital ocn digitalo",
       id: 5,
       color: "linear-gradient(to right, #396afc, #2948ff)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/digitalOcean",
@@ -131,11 +131,24 @@ const More = () => {
     changeMoreActive(false);
   };
 
+  // set new id value
   useEffect(() => {
     Array.from(document.querySelectorAll(".more-provider")).forEach((item) => {
       // console.log(item);
       if (Number(item.getAttribute("data")) === currentActiveProviderId) {
         item.setAttribute("id", "active");
+      }
+    });
+  }, [currentActiveProviderId]);
+
+  // disable a div when it s data is currently displayed on the app
+  useEffect(() => {
+    Array.from(document.querySelectorAll(".more-provider")).forEach((item) => {
+      // active the cursore event to all
+      item.parentElement.style.pointerEvents = "auto";
+      // disable the current one
+      if (Number(item.getAttribute("data")) === currentActiveProviderId) {
+        item.parentElement.style.pointerEvents = "none";
       }
     });
   }, [currentActiveProviderId]);
@@ -147,6 +160,13 @@ const More = () => {
 
   useEffect(() => {
     setLiveCount(Array.from(document.querySelectorAll(".more-item")).length);
+    // check, give the Id and disable the current provider div anyway on each search
+    Array.from(document.querySelectorAll(".more-provider")).forEach((item) => {
+      if (Number(item.getAttribute("data")) === currentActiveProviderId) {
+        item.setAttribute("id", "active");
+        item.parentElement.style.pointerEvents = "none";
+      }
+    });
   }, [searchTerm]);
 
   return (
@@ -201,6 +221,8 @@ const More = () => {
                   );
                 })}
             </div>
+
+            {liveCount === 0 && <p>Nothing found!</p>}
           </div>
         </div>
       </div>
