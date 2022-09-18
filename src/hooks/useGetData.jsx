@@ -28,6 +28,7 @@ const useGetData = (currentUrl) => {
       });
   }, [currentUrl]);
 
+  // console.log(currentData);
   return { currentData, isError, isLoading };
 };
 

@@ -1,9 +1,13 @@
 import React, { useContext, useState } from "react";
 import ActiveProviderContext from "../context/ActiveProvider";
+import DownloadActiveContext from "../context/DownloadIsActive";
 import { HiDownload } from "react-icons/hi";
 
 const SideHeader = () => {
   const { active } = useContext(ActiveProviderContext);
+  const { downloadActive, changeDownloadActive } = useContext(
+    DownloadActiveContext
+  );
 
   return (
     <div className="side-header">
@@ -19,7 +23,12 @@ const SideHeader = () => {
         </p>
       </div>
       <div className="actions">
-        <div className="download">
+        <div
+          className="download"
+          onClick={() => {
+            changeDownloadActive(true);
+          }}
+        >
           <HiDownload />
         </div>
       </div>
