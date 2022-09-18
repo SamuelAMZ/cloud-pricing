@@ -1,14 +1,24 @@
 import React, { useContext } from "react";
 import Providers from "./Providers";
 import More from "./More";
+import Menu from "./Menu";
 import { BiSearch } from "react-icons/bi";
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import MoreActiveContext from "../context/MoreIsActive";
+import MenuActiveContext from "../context/MenuActive";
 
 const Main = () => {
   const { moreActive, changeMoreActive } = useContext(MoreActiveContext);
+  const { MenuActive, changeMenuActive } = useContext(MenuActiveContext);
 
   return (
     <div className="main">
+      <div className="menu" onClick={() => changeMenuActive(true)}>
+        <HiOutlineMenuAlt2 />
+      </div>
+
+      {MenuActive && <Menu />}
+
       <div className="heaading">
         <h2>Hi John</h2>
         <p>Lorem ipsum dolor sit amet</p>

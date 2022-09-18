@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import DownloadActiveContext from "../context/DownloadIsActive";
+import { CSVLink } from "react-csv";
 
 const Download = ({ data }) => {
   const { downloadActive, changeDownloadActive } = useContext(
@@ -11,14 +12,33 @@ const Download = ({ data }) => {
     let dataStr = JSON.stringify(data);
     let dataUri =
       "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
-
     let exportFileDefaultName = "data.json";
-
     let linkElement = document.createElement("a");
     linkElement.setAttribute("href", dataUri);
     linkElement.setAttribute("download", exportFileDefaultName);
     linkElement.click();
   }
+
+  // let company = [];
+  // let gpt = [];
+  // let gpc = [];
+  // let gpr = [];
+  // let gppm = [];
+  // let gpph = [];
+  // data.computer.generalPurpose.forEach((item, id) => {
+  //   if (id !== data.computer.generalPurpose.length - 1) {
+  //     company.push(data.company);
+  //     gpt.push(item.title);
+  //     gpc.push(item.cpu);
+  //     gpr.push(item.ram);
+  //     gppm.push(item.pricePerMo);
+  //     gpph.push(item.pricePerHour);
+  //   }
+  // });
+
+  // console.log(gpt, gpc, gpr, gppm, gpph);
+
+  // export csv
 
   return (
     <div className="download">
@@ -31,7 +51,11 @@ const Download = ({ data }) => {
           <div className="json elm" onClick={() => exportJsonData()}>
             JSON
           </div>
-          <div className="csv elm">CSV</div>
+          <div className="csv elm">
+            CSV
+            <p>(coming soon)</p>
+            {/* <CSVLink data={csvData}>CSV</CSVLink> */}
+          </div>
         </div>
 
         <div className="info">
