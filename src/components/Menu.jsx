@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { VscClose } from "react-icons/vsc";
 import MenuActiveContext from "../context/MenuActive";
+import { NavLink } from "react-router-dom";
 
 const Menu = () => {
   const { MenuActive, changeMenuActive } = useContext(MenuActiveContext);
@@ -9,11 +10,19 @@ const Menu = () => {
     <div className="side-menu">
       <div className="elm-back" onClick={() => changeMenuActive(false)}></div>
       <div className="side-menu-content">
-        <ul>
-          <li>Cloud Prices App</li>
-          <li>App</li>
-          <li>About</li>
-          <li>API docs</li>
+        <ul onClick={() => changeMenuActive(false)}>
+          <li>
+            <NavLink to={"/"}>CLOUD PRICES APP</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/"}>App</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/about"}>About</NavLink>
+          </li>
+          <li>
+            <NavLink to={"/api"}>Api Docs</NavLink>
+          </li>
         </ul>
 
         <a

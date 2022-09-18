@@ -20,15 +20,15 @@ const Main = () => {
       {MenuActive && <Menu />}
 
       <div className="heaading">
-        <h2>Hi John</h2>
-        <p>Lorem ipsum dolor sit amet</p>
+        <h2>Cloud Prices</h2>
+        <p>A Node price app from different cloud services</p>
       </div>
       <div className="search" onClick={() => changeMoreActive(true)}>
         <form>
           <div className="icon">
             <BiSearch />
           </div>
-          <input type="text" placeholder="Search for prices" readOnly />
+          <input type="text" placeholder="Search for providers" readOnly />
         </form>
       </div>
 

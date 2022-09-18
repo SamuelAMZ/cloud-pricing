@@ -51,6 +51,12 @@
         a {
           color: white;
           text-decoration: none;
+          &:first-child {
+            border: none;
+          }
+          &.active {
+            border-bottom: 2px solid #4a00e0;
+          }
         }
       }
     }

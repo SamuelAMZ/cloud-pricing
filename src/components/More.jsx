@@ -174,7 +174,11 @@ const More = () => {
       <div className="more-back" onClick={() => changeMoreActive(false)}></div>
       <div className="more-content">
         <div className="search more-search">
-          <form>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+          >
             <div className="icon">
               <BiSearch />
             </div>
