@@ -19,8 +19,14 @@ const Providers = () => {
       id: 1,
       color: "linear-gradient(to right, #8e2de2, #4a00e0)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/linode",
-      pricePerMo: true,
-      pricePerHo: true,
+      pricePerMo: {
+        compute: true,
+        database: true,
+      },
+      pricePerHo: {
+        compute: true,
+        database: false,
+      },
     },
     {
       name: "aws",
@@ -28,8 +34,14 @@ const Providers = () => {
       id: 2,
       color: "linear-gradient(to right, #ff416c, #ff4b2b)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/aws",
-      pricePerMo: true,
-      pricePerHo: false,
+      pricePerMo: {
+        compute: true,
+        database: false,
+      },
+      pricePerHo: {
+        compute: false,
+        database: true,
+      },
     },
     {
       name: "gcp",
@@ -37,8 +49,14 @@ const Providers = () => {
       id: 3,
       color: " linear-gradient(to right, #000428, #004e92)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/gcp",
-      pricePerMo: false,
-      pricePerHo: true,
+      pricePerMo: {
+        compute: false,
+        database: false,
+      },
+      pricePerHo: {
+        compute: true,
+        database: true,
+      },
     },
     {
       name: "azure",
@@ -46,8 +64,14 @@ const Providers = () => {
       id: 4,
       color: "linear-gradient(to right, #659999, #f4791f)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/azure",
-      pricePerMo: true,
-      pricePerHo: false,
+      pricePerMo: {
+        compute: true,
+        database: false,
+      },
+      pricePerHo: {
+        compute: false,
+        database: true,
+      },
     },
 
     {
@@ -56,8 +80,14 @@ const Providers = () => {
       id: 5,
       color: "linear-gradient(to right, #396afc, #2948ff)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/digitalOcean",
-      pricePerMo: true,
-      pricePerHo: true,
+      pricePerMo: {
+        compute: true,
+        database: true,
+      },
+      pricePerHo: {
+        compute: true,
+        database: false,
+      },
     },
     {
       name: "ovh cloud",
@@ -65,8 +95,14 @@ const Providers = () => {
       id: 6,
       color: "linear-gradient(to right, #59c173, #a17fe0, #5d26c1)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/ovh",
-      pricePerMo: false,
-      pricePerHo: true,
+      pricePerMo: {
+        compute: false,
+        database: true,
+      },
+      pricePerHo: {
+        compute: true,
+        database: true,
+      },
     },
     {
       name: "vultr",
@@ -74,8 +110,14 @@ const Providers = () => {
       id: 7,
       color: "linear-gradient(to right, #4e54c8, #8f94fb)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/vultr",
-      pricePerMo: true,
-      pricePerHo: true,
+      pricePerMo: {
+        compute: true,
+        database: false,
+      },
+      pricePerHo: {
+        compute: true,
+        database: false,
+      },
     },
   ];
 
