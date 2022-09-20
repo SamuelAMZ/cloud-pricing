@@ -42,6 +42,8 @@ const Computer = ({ providerdata, trimData }) => {
     setTypeOfComputer("general");
     // reset the mexcomp to 5 every load of the component
     setMaxComp(5);
+
+    // console.log(active);
   }, [active]);
 
   return (

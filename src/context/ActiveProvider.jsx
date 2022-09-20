@@ -9,8 +9,14 @@ export const ActiveProvider = ({ children }) => {
     id: 1,
     color: "linear-gradient(to right, #8e2de2, #4a00e0)",
     url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/linode",
-    pricePerMo: true,
-    pricePerHo: true,
+    pricePerMo: {
+      compute: true,
+      database: true,
+    },
+    pricePerHo: {
+      compute: true,
+      database: false,
+    },
   });
 
   const changeActive = (newActive) => {
