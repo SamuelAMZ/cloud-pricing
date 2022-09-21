@@ -4,96 +4,24 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { FaAws, FaLinode, FaDigitalOcean } from "react-icons/fa";
 import { SiGooglecloud, SiOvh, SiVultr } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
+import AllProviderContext from "../context/AllProviders";
 import ActiveProviderContext from "../context/ActiveProvider";
 import IsLoadingContext from "../context/IsLoading";
 import DefaultCompContext from "../context/DefaultCompType";
-import PricetypeContext from "../context/PriceType";
 import MoreActiveContext from "../context/MoreIsActive";
 import CurrentActiveProviderIdContext from "../context/CurrentActiveProviderId";
 
 const More = () => {
+  let AllProviders = useContext(AllProviderContext);
   const { moreActive, changeMoreActive } = useContext(MoreActiveContext);
   const { changeActive } = useContext(ActiveProviderContext);
   const { isLoading, changeLoading } = useContext(IsLoadingContext);
   const { defaultComp, changeDefaultComp } = useContext(DefaultCompContext);
-  const { pricetype, changePricetype } = useContext(PricetypeContext);
   const { currentActiveProviderId, changeCurrentActiveproviderId } = useContext(
     CurrentActiveProviderIdContext
   );
 
-  const providers = [
-    {
-      name: "linode",
-      full: "Linode",
-      tags: "linode",
-      id: 1,
-      color: "linear-gradient(to right, #8e2de2, #4a00e0)",
-      url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/linode",
-      pricePerMo: true,
-      pricePerHo: true,
-    },
-    {
-      name: "aws",
-      full: "Amazon Web Services",
-      tags: "amazon web services aws",
-      id: 2,
-      color: "linear-gradient(to right, #ff416c, #ff4b2b)",
-      url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/aws",
-      pricePerMo: true,
-      pricePerHo: false,
-    },
-    {
-      name: "gcp",
-      full: "Google Cloud Platform",
-      tags: "Google Cloud Platform gcp",
-      id: 3,
-      color: " linear-gradient(to right, #000428, #004e92)",
-      url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/gcp",
-      pricePerMo: false,
-      pricePerHo: true,
-    },
-    {
-      name: "azure",
-      full: "Azure",
-      tags: "azure",
-      id: 4,
-      color: "linear-gradient(to right, #659999, #f4791f)",
-      url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/azure",
-      pricePerMo: true,
-      pricePerHo: false,
-    },
-
-    {
-      name: "digital Ocn",
-      full: "Digital Ocean",
-      tags: "digital ocean digital ocn digitalo",
-      id: 5,
-      color: "linear-gradient(to right, #396afc, #2948ff)",
-      url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/digitalOcean",
-      pricePerMo: true,
-      pricePerHo: true,
-    },
-    {
-      name: "ovh cloud",
-      full: "Ovh Cloud",
-      tags: "ovh cloud",
-      id: 6,
-      color: "linear-gradient(to right, #59c173, #a17fe0, #5d26c1)",
-      url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/ovh",
-      pricePerMo: false,
-      pricePerHo: true,
-    },
-    {
-      name: "vultr",
-      full: "Vultr",
-      tags: "vultr",
-      id: 7,
-      color: "linear-gradient(to right, #4e54c8, #8f94fb)",
-      url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/vultr",
-      pricePerMo: true,
-      pricePerHo: true,
-    },
-  ];
+  const providers = AllProviders;
 
   const activer = (e, provider) => {
     // empty the id value of the other childrens
@@ -120,13 +48,7 @@ const More = () => {
     } else {
       changeDefaultComp("general");
     }
-    // change price type
-    if (provider.pricePerHo) {
-      changePricetype("perho");
-    }
-    if (provider.pricePerMo) {
-      changePricetype("permo");
-    }
+
     // close more box
     changeMoreActive(false);
   };

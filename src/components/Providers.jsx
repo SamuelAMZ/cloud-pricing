@@ -7,7 +7,6 @@ import AllProviderContext from "../context/AllProviders";
 import ActiveProviderContext from "../context/ActiveProvider";
 import IsLoadingContext from "../context/IsLoading";
 import DefaultCompContext from "../context/DefaultCompType";
-import PricetypeContext from "../context/PriceType";
 import MoreActiveContext from "../context/MoreIsActive";
 import CurrentActiveProviderIdContext from "../context/CurrentActiveProviderId";
 
@@ -16,7 +15,6 @@ const Providers = () => {
   const { changeActive } = useContext(ActiveProviderContext);
   const { isLoading, changeLoading } = useContext(IsLoadingContext);
   const { defaultComp, changeDefaultComp } = useContext(DefaultCompContext);
-  const { pricetype, changePricetype } = useContext(PricetypeContext);
   const { moreActive, changeMoreActive } = useContext(MoreActiveContext);
   const { currentActiveProviderId, changeCurrentActiveproviderId } = useContext(
     CurrentActiveProviderIdContext
@@ -50,13 +48,6 @@ const Providers = () => {
       changeDefaultComp("computeData");
     } else {
       changeDefaultComp("general");
-    }
-    // change price type
-    if (provider.pricePerHo) {
-      changePricetype("perho");
-    }
-    if (provider.pricePerMo) {
-      changePricetype("permo");
     }
   };
 

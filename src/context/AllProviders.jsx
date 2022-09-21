@@ -8,6 +8,7 @@ export const AllProvidersProvider = ({ children }) => {
       name: "linode",
       full: "Linode",
       id: 1,
+      tags: "linode",
       color: "linear-gradient(to right, #8e2de2, #4a00e0)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/linode",
       pricePerMo: {
@@ -23,6 +24,7 @@ export const AllProvidersProvider = ({ children }) => {
       name: "aws",
       full: "Amazon Web Services",
       id: 2,
+      tags: "amazon web services aws",
       color: "linear-gradient(to right, #ff416c, #ff4b2b)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/aws",
       pricePerMo: {
@@ -38,6 +40,7 @@ export const AllProvidersProvider = ({ children }) => {
       name: "gcp",
       full: "Google Cloud Platform",
       id: 3,
+      tags: "Google Cloud Platform gcp",
       color: " linear-gradient(to right, #000428, #004e92)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/gcp",
       pricePerMo: {
@@ -53,6 +56,7 @@ export const AllProvidersProvider = ({ children }) => {
       name: "azure",
       full: "Azure",
       id: 4,
+      tags: "azure",
       color: "linear-gradient(to right, #659999, #f4791f)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/azure",
       pricePerMo: {
@@ -69,6 +73,7 @@ export const AllProvidersProvider = ({ children }) => {
       name: "digital Ocn",
       full: "Digital Ocean",
       id: 5,
+      tags: "digital ocean digital ocn digitalo",
       color: "linear-gradient(to right, #396afc, #2948ff)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/digitalOcean",
       pricePerMo: {
@@ -84,11 +89,12 @@ export const AllProvidersProvider = ({ children }) => {
       name: "ovh cloud",
       full: "Ovh Cloud",
       id: 6,
+      tags: "ovh cloud",
       color: "linear-gradient(to right, #59c173, #a17fe0, #5d26c1)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/ovh",
       pricePerMo: {
         compute: false,
-        database: true,
+        database: false,
       },
       pricePerHo: {
         compute: true,
@@ -99,15 +105,16 @@ export const AllProvidersProvider = ({ children }) => {
       name: "vultr",
       full: "Vultr",
       id: 7,
+      tags: "vultr",
       color: "linear-gradient(to right, #4e54c8, #8f94fb)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/vultr",
       pricePerMo: {
         compute: true,
-        database: false,
+        database: true,
       },
       pricePerHo: {
         compute: true,
-        database: false,
+        database: true,
       },
     },
   ];

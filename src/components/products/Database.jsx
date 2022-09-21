@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
 import { FaAws, FaLinode, FaDigitalOcean } from "react-icons/fa";
 import { SiGooglecloud, SiOvh, SiVultr } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
@@ -12,7 +11,7 @@ const Database = ({ providerdata, trimData }) => {
     DefaultDatabaseContext
   );
 
-  const [pricetype, setPricetype] = useState("permo");
+  const [activePrice, setActivePrice] = useState("");
 
   // // handle type of computer changes from select
   const [typeOfDatabase, setTypeOfDatabase] = useState(defaultDatabase);
@@ -38,16 +37,26 @@ const Database = ({ providerdata, trimData }) => {
   useEffect(() => {
     // set the default computer type to "general purposes"
     setTypeOfDatabase("postgres");
-    // change price type
-    if (active.pricePerMo.database) {
-      setPricetype("permo");
-    }
-    if (active.pricePerHo.database) {
-      setPricetype("perho");
-    }
     // reset the mexcomp to 5 every load of the component
     setMaxComp(5);
   }, [active]);
+
+  // handling the prices
+  useEffect(() => {
+    console.log(active);
+
+    // permo check
+    if (active.pricePerMo.database && active.pricePerHo.database) {
+      setActivePrice("permo");
+    }
+    if (active.pricePerMo.database && !active.pricePerHo.database) {
+      setActivePrice("permo");
+    }
+    // perho check
+    if (!active.pricePerMo.database && active.pricePerHo.database) {
+      setActivePrice("perho");
+    }
+  }, []);
 
   return (
     <div className="computer">
@@ -59,15 +68,17 @@ const Database = ({ providerdata, trimData }) => {
             <select onChange={(e) => setTypeOfDatabase(e.target.value)}>
               <option value="postgres">Postgres</option>
               <option value="mysql">Mysql</option>
-              <option value="mongo">MongoDB</option>
+              {active.name !== "vultr" && (
+                <option value="mongo">MongoDB</option>
+              )}
             </select>
           </form>
           <form id="typeofprice">
-            <select name="price" onChange={(e) => setPricetype(e.target.value)}>
-              {pricetype === "permo" && (
+            <select onChange={(e) => setActivePrice(e.target.value)}>
+              {active.pricePerMo.database && (
                 <option value="permo">Price Per Month</option>
               )}
-              {pricetype === "perho" && (
+              {active.pricePerHo.database && (
                 <option value="perho">Price Per Hour</option>
               )}
             </select>
@@ -138,11 +149,11 @@ const Database = ({ providerdata, trimData }) => {
               if (id === takeDatabaseType().length - 1) {
                 return;
               }
-              return <p key={id}>{data.title} </p>;
+              return <p key={id}>{trimData(data.title)} </p>;
             })}
         </div>
-        <div className="size">
-          <p>Size</p>
+        <div className="cpu">
+          <p>CPU</p>
           {takeDatabaseType()
             .slice(0, maxComp)
             .map((data, id) => {
@@ -151,9 +162,26 @@ const Database = ({ providerdata, trimData }) => {
               }
               return (
                 <p key={id}>
-                  {trimData(data.size) +
+                  {trimData(data.cpu) +
                     " " +
-                    takeDatabaseType()[takeDatabaseType().length - 1].size}
+                    takeDatabaseType()[takeDatabaseType().length - 1].cpu}
+                </p>
+              );
+            })}
+        </div>
+        <div className="ram">
+          <p>RAM</p>
+          {takeDatabaseType()
+            .slice(0, maxComp)
+            .map((data, id) => {
+              if (id === takeDatabaseType().length - 1) {
+                return;
+              }
+              return (
+                <p key={id}>
+                  {trimData(data.ram) +
+                    " " +
+                    takeDatabaseType()[takeDatabaseType().length - 1].ram}
                 </p>
               );
             })}
@@ -168,12 +196,12 @@ const Database = ({ providerdata, trimData }) => {
               }
               return (
                 <p key={id}>
-                  {pricetype === "permo" &&
+                  {activePrice === "permo" &&
                     trimData(data.pricePerMo) +
                       " " +
                       takeDatabaseType()[takeDatabaseType().length - 1]
                         .currency}
-                  {pricetype === "perho" &&
+                  {activePrice === "perho" &&
                     data.pricePerHour +
                       " " +
                       takeDatabaseType()[takeDatabaseType().length - 1]
@@ -185,6 +213,9 @@ const Database = ({ providerdata, trimData }) => {
       </div>
 
       <div className="next-actions">
+        {maxComp > 5 && (
+          <button onClick={() => setMaxComp(5)}>Less data</button>
+        )}
         {checkAndRemoveActions() && (
           <>
             <button onClick={() => setMaxComp(maxComp + 5)}>Next 5 data</button>
@@ -192,9 +223,6 @@ const Database = ({ providerdata, trimData }) => {
           </>
         )}
         {!checkAndRemoveActions() && <p>You have everything!</p>}
-        {maxComp > 5 && (
-          <button onClick={() => setMaxComp(5)}>Less data</button>
-        )}
       </div>
     </div>
   );

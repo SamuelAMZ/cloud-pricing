@@ -1,16 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
 import { FaAws, FaLinode, FaDigitalOcean } from "react-icons/fa";
 import { SiGooglecloud, SiOvh, SiVultr } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import ActiveProviderContext from "../../context/ActiveProvider";
 import DefaultCompContext from "../../context/DefaultCompType";
-import PricetypeContext from "../../context/PriceType";
 
 const Computer = ({ providerdata, trimData }) => {
   const { active } = useContext(ActiveProviderContext);
   const { defaultComp, changeDefaultComp } = useContext(DefaultCompContext);
-  const { pricetype, changePricetype } = useContext(PricetypeContext);
+
+  const [activePrice, setActivePrice] = useState("");
 
   // handle the displaying of a max of 5 data on the first load
   const [maxComp, setMaxComp] = useState(5);
@@ -42,9 +41,22 @@ const Computer = ({ providerdata, trimData }) => {
     setTypeOfComputer("general");
     // reset the mexcomp to 5 every load of the component
     setMaxComp(5);
-
-    // console.log(active);
   }, [active]);
+
+  // handling the prices
+  useEffect(() => {
+    // permo check
+    if (active.pricePerMo.compute && active.pricePerHo.compute) {
+      setActivePrice("permo");
+    }
+    if (active.pricePerMo.compute && !active.pricePerHo.compute) {
+      setActivePrice("permo");
+    }
+    // perho check
+    if (!active.pricePerMo.compute && active.pricePerHo.compute) {
+      setActivePrice("perho");
+    }
+  }, []);
 
   return (
     <div className="computer">
@@ -70,14 +82,11 @@ const Computer = ({ providerdata, trimData }) => {
             </select>
           </form>
           <form id="typeofprice">
-            <select
-              name="price"
-              onChange={(e) => changePricetype(e.target.value)}
-            >
-              {active.pricePerMo && (
+            <select onChange={(e) => setActivePrice(e.target.value)}>
+              {active.pricePerMo.compute && (
                 <option value="permo">Price Per Month</option>
               )}
-              {active.pricePerHo && (
+              {active.pricePerHo.compute && (
                 <option value="perho">Price Per Hour</option>
               )}
             </select>
@@ -195,12 +204,12 @@ const Computer = ({ providerdata, trimData }) => {
               }
               return (
                 <p key={id}>
-                  {pricetype === "permo" &&
+                  {activePrice === "permo" &&
                     trimData(data.pricePerMo) +
                       " " +
                       takeComputerType()[takeComputerType().length - 1]
                         .currency}
-                  {pricetype === "perho" &&
+                  {activePrice === "perho" &&
                     data.pricePerHour +
                       " " +
                       takeComputerType()[takeComputerType().length - 1]
@@ -212,6 +221,9 @@ const Computer = ({ providerdata, trimData }) => {
       </div>
 
       <div className="next-actions">
+        {maxComp > 5 && (
+          <button onClick={() => setMaxComp(5)}>Less data</button>
+        )}
         {checkAndRemoveActions() && (
           <>
             <button onClick={() => setMaxComp(maxComp + 5)}>Next 5 data</button>
@@ -219,9 +231,6 @@ const Computer = ({ providerdata, trimData }) => {
           </>
         )}
         {!checkAndRemoveActions() && <p>You have everything!</p>}
-        {maxComp > 5 && (
-          <button onClick={() => setMaxComp(5)}>Less data</button>
-        )}
       </div>
     </div>
   );

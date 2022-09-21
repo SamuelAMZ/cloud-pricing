@@ -21,8 +21,8 @@ const SideBody = () => {
   // trim too long data strings
   const trimData = (targetData) => {
     if (targetData) {
-      if (targetData.length >= 10) {
-        return targetData.slice(0, 9) + "...";
+      if (targetData.length >= 12) {
+        return targetData.slice(0, 12) + "...";
       } else {
         return targetData;
       }
