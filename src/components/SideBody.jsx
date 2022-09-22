@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import Download from "./Download";
 import Computer from "./products/Computer";
 import Database from "./products/Database";
+import Storage from "./products/Storage";
 import useGetData from "../hooks/useGetData";
 import ActiveProviderContext from "../context/ActiveProvider";
 import DownloadActiveContext from "../context/DownloadIsActive";
@@ -21,8 +22,8 @@ const SideBody = () => {
   // trim too long data strings
   const trimData = (targetData) => {
     if (targetData) {
-      if (targetData.length >= 12) {
-        return targetData.slice(0, 12) + "...";
+      if (targetData.length >= 10) {
+        return targetData.slice(0, 10) + "...";
       } else {
         return targetData;
       }
@@ -36,6 +37,7 @@ const SideBody = () => {
       <div className="content-container">
         <Computer providerdata={providerdata} trimData={trimData} />
         <Database providerdata={providerdata} trimData={trimData} />
+        <Storage providerdata={providerdata} trimData={trimData} />
       </div>
 
       {/* download */}

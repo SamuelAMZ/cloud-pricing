@@ -11,13 +11,16 @@ export const AllProvidersProvider = ({ children }) => {
       tags: "linode",
       color: "linear-gradient(to right, #8e2de2, #4a00e0)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/linode",
+      storage: ["block", "object"],
       pricePerMo: {
         compute: true,
         database: true,
+        storage: true,
       },
       pricePerHo: {
         compute: true,
         database: false,
+        storage: false,
       },
     },
     {
@@ -27,13 +30,16 @@ export const AllProvidersProvider = ({ children }) => {
       tags: "amazon web services aws",
       color: "linear-gradient(to right, #ff416c, #ff4b2b)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/aws",
+      storage: ["S3Standard", "S3OneZone"],
       pricePerMo: {
         compute: true,
         database: true,
+        storage: true,
       },
       pricePerHo: {
         compute: false,
         database: false,
+        storage: false,
       },
     },
     {
@@ -43,13 +49,16 @@ export const AllProvidersProvider = ({ children }) => {
       tags: "Google Cloud Platform gcp",
       color: " linear-gradient(to right, #000428, #004e92)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/gcp",
+      storage: ["standard", "nearline"],
       pricePerMo: {
         compute: false,
         database: false,
+        storage: true,
       },
       pricePerHo: {
         compute: true,
         database: true,
+        storage: false,
       },
     },
     {
@@ -59,13 +68,16 @@ export const AllProvidersProvider = ({ children }) => {
       tags: "azure",
       color: "linear-gradient(to right, #659999, #f4791f)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/azure",
+      storage: ["premium", "standard"],
       pricePerMo: {
         compute: true,
         database: false,
+        storage: true,
       },
       pricePerHo: {
         compute: false,
         database: true,
+        storage: false,
       },
     },
 
@@ -76,13 +88,16 @@ export const AllProvidersProvider = ({ children }) => {
       tags: "digital ocean digital ocn digitalo",
       color: "linear-gradient(to right, #396afc, #2948ff)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/digitalOcean",
+      storage: ["block"],
       pricePerMo: {
         compute: true,
         database: true,
+        storage: true,
       },
       pricePerHo: {
         compute: true,
         database: false,
+        storage: false,
       },
     },
     {
@@ -92,13 +107,16 @@ export const AllProvidersProvider = ({ children }) => {
       tags: "ovh cloud",
       color: "linear-gradient(to right, #59c173, #a17fe0, #5d26c1)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/ovh",
+      storage: ["block", "object"],
       pricePerMo: {
         compute: false,
         database: false,
+        storage: true,
       },
       pricePerHo: {
         compute: true,
         database: true,
+        storage: false,
       },
     },
     {
@@ -108,13 +126,16 @@ export const AllProvidersProvider = ({ children }) => {
       tags: "vultr",
       color: "linear-gradient(to right, #4e54c8, #8f94fb)",
       url: "https://cloud-pricing-362106.ue.r.appspot.com/api/v1/vultr",
+      storage: ["block", "object"],
       pricePerMo: {
         compute: true,
         database: true,
+        storage: true,
       },
       pricePerHo: {
         compute: true,
         database: true,
+        storage: false,
       },
     },
   ];

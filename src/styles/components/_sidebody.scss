@@ -55,6 +55,11 @@
       grid-template-columns: 1fr 1.5fr 1fr 1fr 1fr;
       justify-content: center;
     }
+    .datastorage {
+      display: grid;
+      grid-template-columns: 3.5fr 1fr 1fr;
+      justify-content: center;
+    }
     .data {
       text-transform: capitalize;
 

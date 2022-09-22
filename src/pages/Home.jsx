@@ -4,6 +4,7 @@ import { ActiveProvider } from "../context/ActiveProvider";
 import { IsLoadingProvider } from "../context/IsLoading";
 import { DefaultCompProvider } from "../context/DefaultCompType";
 import { DefaultDatabaseProvider } from "../context/DefaultDatabaseType";
+import { DefaultStorageProvider } from "../context/DefaultStorageType";
 import { MoreActiveProvider } from "../context/MoreIsActive";
 import { CurrentActiveProviderIdProvider } from "../context/CurrentActiveProviderId";
 import { DownloadActiveProvider } from "../context/DownloadIsActive";
@@ -18,16 +19,18 @@ const Home = () => {
           <IsLoadingProvider>
             <DefaultCompProvider>
               <DefaultDatabaseProvider>
-                <MoreActiveProvider>
-                  <CurrentActiveProviderIdProvider>
-                    <DownloadActiveProvider>
-                      <MenuActiveProvider>
-                        <Main />
-                        <Side />
-                      </MenuActiveProvider>
-                    </DownloadActiveProvider>
-                  </CurrentActiveProviderIdProvider>
-                </MoreActiveProvider>
+                <DefaultStorageProvider>
+                  <MoreActiveProvider>
+                    <CurrentActiveProviderIdProvider>
+                      <DownloadActiveProvider>
+                        <MenuActiveProvider>
+                          <Main />
+                          <Side />
+                        </MenuActiveProvider>
+                      </DownloadActiveProvider>
+                    </CurrentActiveProviderIdProvider>
+                  </MoreActiveProvider>
+                </DefaultStorageProvider>
               </DefaultDatabaseProvider>
             </DefaultCompProvider>
           </IsLoadingProvider>

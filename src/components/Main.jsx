@@ -34,7 +34,7 @@ const Main = () => {
 
       <div className="main-providers">
         <div className="title">
-          Providers <span>(15)</span>
+          Providers <span>(7)</span>
         </div>
         <div className="providers">
           <Providers />
