@@ -14,11 +14,13 @@ export const ActiveProvider = ({ children }) => {
       compute: true,
       database: true,
       storage: true,
+      networking: false,
     },
     pricePerHo: {
       compute: true,
       database: false,
       storage: false,
+      networking: true,
     },
   });
 

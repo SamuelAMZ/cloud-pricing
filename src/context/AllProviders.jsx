@@ -16,11 +16,13 @@ export const AllProvidersProvider = ({ children }) => {
         compute: true,
         database: true,
         storage: true,
+        networking: false,
       },
       pricePerHo: {
         compute: true,
         database: false,
         storage: false,
+        networking: true,
       },
     },
     {
@@ -35,11 +37,13 @@ export const AllProvidersProvider = ({ children }) => {
         compute: true,
         database: true,
         storage: true,
+        networking: false,
       },
       pricePerHo: {
         compute: false,
         database: false,
         storage: false,
+        networking: true,
       },
     },
     {
@@ -54,11 +58,13 @@ export const AllProvidersProvider = ({ children }) => {
         compute: false,
         database: false,
         storage: true,
+        networking: false,
       },
       pricePerHo: {
         compute: true,
         database: true,
         storage: false,
+        networking: true,
       },
     },
     {
@@ -73,11 +79,13 @@ export const AllProvidersProvider = ({ children }) => {
         compute: true,
         database: false,
         storage: true,
+        networking: false,
       },
       pricePerHo: {
         compute: false,
         database: true,
         storage: false,
+        networking: true,
       },
     },
 
@@ -93,11 +101,13 @@ export const AllProvidersProvider = ({ children }) => {
         compute: true,
         database: true,
         storage: true,
+        networking: false,
       },
       pricePerHo: {
         compute: true,
         database: false,
         storage: false,
+        networking: true,
       },
     },
     {
@@ -112,11 +122,13 @@ export const AllProvidersProvider = ({ children }) => {
         compute: false,
         database: false,
         storage: true,
+        networking: false,
       },
       pricePerHo: {
         compute: true,
         database: true,
         storage: false,
+        networking: true,
       },
     },
     {
@@ -131,11 +143,13 @@ export const AllProvidersProvider = ({ children }) => {
         compute: true,
         database: true,
         storage: true,
+        networking: false,
       },
       pricePerHo: {
         compute: true,
         database: true,
         storage: false,
+        networking: true,
       },
     },
   ];

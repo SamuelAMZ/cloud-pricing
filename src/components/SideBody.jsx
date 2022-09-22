@@ -3,6 +3,7 @@ import Download from "./Download";
 import Computer from "./products/Computer";
 import Database from "./products/Database";
 import Storage from "./products/Storage";
+import Networking from "./products/Networking";
 import useGetData from "../hooks/useGetData";
 import ActiveProviderContext from "../context/ActiveProvider";
 import DownloadActiveContext from "../context/DownloadIsActive";
@@ -38,6 +39,7 @@ const SideBody = () => {
         <Computer providerdata={providerdata} trimData={trimData} />
         <Database providerdata={providerdata} trimData={trimData} />
         <Storage providerdata={providerdata} trimData={trimData} />
+        <Networking providerdata={providerdata} trimData={trimData} />
       </div>
 
       {/* download */}
