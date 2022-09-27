@@ -15,15 +15,15 @@
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: $background;
+  background: #2a2a3050;
   border-radius: 10px;
 }
 
 body {
   min-width: 100vw;
-  // max-height: 100vh;
   background-color: $background;
   color: $text-w;
+  overflow-x: hidden;
 }
 
 #root {

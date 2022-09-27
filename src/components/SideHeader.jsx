@@ -2,12 +2,20 @@ import React, { useContext, useState } from "react";
 import ActiveProviderContext from "../context/ActiveProvider";
 import DownloadActiveContext from "../context/DownloadIsActive";
 import { HiDownload } from "react-icons/hi";
+import { useEffect } from "react";
 
 const SideHeader = () => {
   const { active } = useContext(ActiveProviderContext);
   const { downloadActive, changeDownloadActive } = useContext(
     DownloadActiveContext
   );
+  const [lastU, setLastU] = useState(null);
+
+  // last update
+  useEffect(() => {
+    if (localStorage.getItem("lastU"))
+      setLastU(JSON.parse(localStorage.getItem("lastU")));
+  }, [active]);
 
   return (
     <div className="side-header">
@@ -17,10 +25,7 @@ const SideHeader = () => {
           <span></span>
           <span></span>
         </div>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. A fugiat
-          corrupti animi distincti
-        </p>
+        <p>Last Update {!lastU ? "loading date..." : lastU}</p>
       </div>
       <div className="actions">
         <div

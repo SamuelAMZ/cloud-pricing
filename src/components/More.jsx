@@ -4,6 +4,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { FaAws, FaLinode, FaDigitalOcean } from "react-icons/fa";
 import { SiGooglecloud, SiOvh, SiVultr } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
+import { IoClose } from "react-icons/io5";
 import AllProviderContext from "../context/AllProviders";
 import ActiveProviderContext from "../context/ActiveProvider";
 import IsLoadingContext from "../context/IsLoading";
@@ -95,6 +96,9 @@ const More = () => {
     <div className="more">
       <div className="more-back" onClick={() => changeMoreActive(false)}></div>
       <div className="more-content">
+        <div className="close" onClick={() => changeMoreActive(false)}>
+          <IoClose />
+        </div>
         <div className="search more-search">
           <form
             onSubmit={(e) => {

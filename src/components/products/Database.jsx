@@ -4,6 +4,7 @@ import { SiGooglecloud, SiOvh, SiVultr } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import ActiveProviderContext from "../../context/ActiveProvider";
 import DefaultDatabaseContext from "../../context/DefaultDatabaseType";
+import { TailSpin } from "react-loader-spinner";
 
 const Database = ({ providerdata, trimData }) => {
   const { active } = useContext(ActiveProviderContext);
@@ -12,6 +13,7 @@ const Database = ({ providerdata, trimData }) => {
   );
 
   const [activePrice, setActivePrice] = useState("");
+  const [dataLoading, setDataloading] = useState(false);
 
   // // handle type of computer changes from select
   const [typeOfDatabase, setTypeOfDatabase] = useState(defaultDatabase);
@@ -43,8 +45,6 @@ const Database = ({ providerdata, trimData }) => {
 
   // handling the prices
   useEffect(() => {
-    console.log(active);
-
     // permo check
     if (active.pricePerMo.database && active.pricePerHo.database) {
       setActivePrice("permo");
@@ -57,6 +57,15 @@ const Database = ({ providerdata, trimData }) => {
       setActivePrice("perho");
     }
   }, []);
+
+  // spin 1sec before data change
+  useEffect(() => {
+    setDataloading(true);
+
+    setTimeout(() => {
+      setDataloading(false);
+    }, 250);
+  }, [typeOfDatabase]);
 
   return (
     <div className="computer">
@@ -86,144 +95,165 @@ const Database = ({ providerdata, trimData }) => {
         </div>
       </div>
 
-      <div className="data datadatabase">
-        <div className="logo">
-          <p>Company</p>
-          {takeDatabaseType()
-            .slice(0, maxComp)
-            .map((data, id) => {
-              if (id === takeDatabaseType().length - 1) {
-                return;
-              }
-              return (
-                <p key={id}>
-                  {active.id === 1 && (
-                    <>
-                      <FaLinode /> <span> Linode</span>
-                    </>
-                  )}
-                  {active.id === 2 && (
-                    <>
-                      <FaAws /> <span> AWS</span>
-                    </>
-                  )}
-                  {active.id === 3 && (
-                    <>
-                      <SiGooglecloud />
-                      <span> GCP</span>
-                    </>
-                  )}
-                  {active.id === 4 && (
-                    <>
-                      <VscAzure />
-                      <span> Azure</span>
-                    </>
-                  )}
-                  {active.id === 5 && (
-                    <>
-                      <FaDigitalOcean />
-                      <span> DigitalO</span>
-                    </>
-                  )}
-                  {active.id === 6 && (
-                    <>
-                      <SiOvh />
-                      <span> OVH</span>
-                    </>
-                  )}
-                  {active.id === 7 && (
-                    <>
-                      <SiVultr />
-                      <span> Vultr</span>
-                    </>
-                  )}
-                </p>
-              );
-            })}
-        </div>
-        <div className="name">
-          <p>name</p>
-          {takeDatabaseType()
-            .slice(0, maxComp)
-            .map((data, id) => {
-              if (id === takeDatabaseType().length - 1) {
-                return;
-              }
-              return <p key={id}>{trimData(data.title)} </p>;
-            })}
-        </div>
-        <div className="cpu">
-          <p>CPU</p>
-          {takeDatabaseType()
-            .slice(0, maxComp)
-            .map((data, id) => {
-              if (id === takeDatabaseType().length - 1) {
-                return;
-              }
-              return (
-                <p key={id}>
-                  {trimData(data.cpu) +
-                    " " +
-                    takeDatabaseType()[takeDatabaseType().length - 1].cpu}
-                </p>
-              );
-            })}
-        </div>
-        <div className="ram">
-          <p>RAM</p>
-          {takeDatabaseType()
-            .slice(0, maxComp)
-            .map((data, id) => {
-              if (id === takeDatabaseType().length - 1) {
-                return;
-              }
-              return (
-                <p key={id}>
-                  {trimData(data.ram) +
-                    " " +
-                    takeDatabaseType()[takeDatabaseType().length - 1].ram}
-                </p>
-              );
-            })}
-        </div>
-        <div className="price">
-          <p>Price</p>
-          {takeDatabaseType()
-            .slice(0, maxComp)
-            .map((data, id) => {
-              if (id === takeDatabaseType().length - 1) {
-                return;
-              }
-              return (
-                <p key={id}>
-                  {activePrice === "permo" &&
-                    trimData(data.pricePerMo) +
-                      " " +
-                      takeDatabaseType()[takeDatabaseType().length - 1]
-                        .currency}
-                  {activePrice === "perho" &&
-                    data.pricePerHour +
-                      " " +
-                      takeDatabaseType()[takeDatabaseType().length - 1]
-                        .currency}
-                </p>
-              );
-            })}
-        </div>
-      </div>
+      {dataLoading ? (
+        <TailSpin
+          height="50"
+          width="100%"
+          color="#2d05be"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      ) : (
+        <>
+          <div className="data datadatabase">
+            <div className="logo">
+              <p>Company</p>
+              {takeDatabaseType()
+                .slice(0, maxComp)
+                .map((data, id) => {
+                  if (id === takeDatabaseType().length - 1) {
+                    return;
+                  }
+                  return (
+                    <p key={id}>
+                      {active.id === 1 && (
+                        <>
+                          <FaLinode /> <span> Linode</span>
+                        </>
+                      )}
+                      {active.id === 2 && (
+                        <>
+                          <FaAws /> <span> AWS</span>
+                        </>
+                      )}
+                      {active.id === 3 && (
+                        <>
+                          <SiGooglecloud />
+                          <span> GCP</span>
+                        </>
+                      )}
+                      {active.id === 4 && (
+                        <>
+                          <VscAzure />
+                          <span> Azure</span>
+                        </>
+                      )}
+                      {active.id === 5 && (
+                        <>
+                          <FaDigitalOcean />
+                          <span> DigitalO</span>
+                        </>
+                      )}
+                      {active.id === 6 && (
+                        <>
+                          <SiOvh />
+                          <span> OVH</span>
+                        </>
+                      )}
+                      {active.id === 7 && (
+                        <>
+                          <SiVultr />
+                          <span> Vultr</span>
+                        </>
+                      )}
+                    </p>
+                  );
+                })}
+            </div>
+            <div className="name">
+              <p>name</p>
+              {takeDatabaseType()
+                .slice(0, maxComp)
+                .map((data, id) => {
+                  if (id === takeDatabaseType().length - 1) {
+                    return;
+                  }
+                  return <p key={id}>{trimData(data.title)} </p>;
+                })}
+            </div>
+            <div className="cpu">
+              <p>CPU</p>
+              {takeDatabaseType()
+                .slice(0, maxComp)
+                .map((data, id) => {
+                  if (id === takeDatabaseType().length - 1) {
+                    return;
+                  }
+                  return (
+                    <p key={id}>
+                      {trimData(data.cpu) +
+                        " " +
+                        takeDatabaseType()[takeDatabaseType().length - 1].cpu}
+                    </p>
+                  );
+                })}
+            </div>
+            <div className="ram">
+              <p>RAM</p>
+              {takeDatabaseType()
+                .slice(0, maxComp)
+                .map((data, id) => {
+                  if (id === takeDatabaseType().length - 1) {
+                    return;
+                  }
+                  return (
+                    <p key={id}>
+                      {trimData(data.ram) +
+                        " " +
+                        takeDatabaseType()[takeDatabaseType().length - 1].ram}
+                    </p>
+                  );
+                })}
+            </div>
+            <div className="price">
+              <p>Price</p>
+              {takeDatabaseType()
+                .slice(0, maxComp)
+                .map((data, id) => {
+                  if (id === takeDatabaseType().length - 1) {
+                    return;
+                  }
+                  return (
+                    <p key={id}>
+                      {activePrice === "permo" &&
+                        trimData(data.pricePerMo) +
+                          " " +
+                          takeDatabaseType()[takeDatabaseType().length - 1]
+                            .currency}
+                      {activePrice === "perho" &&
+                        trimData(data.pricePerHour) +
+                          " " +
+                          takeDatabaseType()[takeDatabaseType().length - 1]
+                            .currency}
+                    </p>
+                  );
+                })}
+            </div>
+          </div>
 
-      <div className="next-actions">
-        {maxComp > 5 && (
-          <button onClick={() => setMaxComp(5)}>Less data</button>
-        )}
-        {checkAndRemoveActions() && (
-          <>
-            <button onClick={() => setMaxComp(maxComp + 5)}>Next 5 data</button>
-            <button onClick={() => setMaxComp(maxComp + 50)}>Next 50</button>
-          </>
-        )}
-        {!checkAndRemoveActions() && <p>You have everything!</p>}
-      </div>
+          <div className="next-actions">
+            {maxComp > 5 && (
+              <button className="less" onClick={() => setMaxComp(5)}>
+                Less data
+              </button>
+            )}
+            {checkAndRemoveActions() && (
+              <>
+                <button onClick={() => setMaxComp(maxComp + 5)}>
+                  Next 5 data
+                </button>
+                <button onClick={() => setMaxComp(maxComp + 50)}>
+                  Next 50
+                </button>
+              </>
+            )}
+            {!checkAndRemoveActions() && <p>You have everything!</p>}
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import DownloadActiveContext from "../context/DownloadIsActive";
 import { CSVLink } from "react-csv";
+import { IoClose } from "react-icons/io5";
 
 const Download = ({ data }) => {
   const { downloadActive, changeDownloadActive } = useContext(
@@ -47,6 +48,9 @@ const Download = ({ data }) => {
         onClick={() => changeDownloadActive(false)}
       ></div>
       <div className="elm-content">
+        <div className="close" onClick={() => changeDownloadActive(false)}>
+          <IoClose />
+        </div>
         <div className="actions">
           <div className="json elm" onClick={() => exportJsonData()}>
             JSON
@@ -82,16 +86,12 @@ const Download = ({ data }) => {
                 <li>RAM</li>
                 <li>CPU</li>
                 <li>Prices</li>
-                <li>Storage Volume</li>
               </ul>
             </div>
             <div className=" data">
               <h4>Storage</h4>
               <ul>
                 <li>Provider</li>
-                <li>Product Name</li>
-                <li>RAM</li>
-                <li>CPU</li>
                 <li>Prices</li>
                 <li>Storage Volume</li>
               </ul>
@@ -101,10 +101,8 @@ const Download = ({ data }) => {
               <ul>
                 <li>Provider</li>
                 <li>Product Name</li>
-                <li>RAM</li>
-                <li>CPU</li>
                 <li>Prices</li>
-                <li>Storage Volume</li>
+                <li>Value</li>
               </ul>
             </div>
           </div>

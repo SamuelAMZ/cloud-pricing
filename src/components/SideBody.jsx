@@ -7,6 +7,7 @@ import Networking from "./products/Networking";
 import useGetData from "../hooks/useGetData";
 import ActiveProviderContext from "../context/ActiveProvider";
 import DownloadActiveContext from "../context/DownloadIsActive";
+import { TailSpin } from "react-loader-spinner";
 
 const SideBody = () => {
   const { active } = useContext(ActiveProviderContext);
@@ -20,11 +21,15 @@ const SideBody = () => {
     isLoading,
   } = useGetData(active.url);
 
+  // setting the last update to localstorage
+  if (providerdata)
+    localStorage.setItem("lastU", JSON.stringify(providerdata.lastUpdate));
+
   // trim too long data strings
   const trimData = (targetData) => {
     if (targetData) {
-      if (targetData.length >= 10) {
-        return targetData.slice(0, 10) + "...";
+      if (targetData.length >= 8) {
+        return targetData.slice(0, 7) + "...";
       } else {
         return targetData;
       }
@@ -32,7 +37,16 @@ const SideBody = () => {
   };
 
   return isLoading ? (
-    <p>loading...</p>
+    <TailSpin
+      height="80"
+      width="100%"
+      color="#2d05be"
+      ariaLabel="tail-spin-loading"
+      radius="1"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+    />
   ) : (
     <>
       <div className="content-container">

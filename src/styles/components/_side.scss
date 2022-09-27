@@ -1,7 +1,9 @@
+@use "../global/breakpoints" as b;
 @import "../global/variables";
 
 .side {
   background-color: rgb(229, 229, 229);
+  box-shadow: 0 0 2px 7px rgb(66 63 255 / 27%);
   min-height: 100%;
   width: 100%;
   color: black;
@@ -10,10 +12,21 @@
   align-items: center;
   justify-content: center;
 
+  @include b.breakpoint("700") {
+    border-radius: 10px;
+    height: 600px;
+    overflow: auto;
+  }
+
   .side-container {
     width: 90%;
     height: 90%;
     overflow: auto;
     padding: 0 1rem 0 0;
+
+    @include b.breakpoint("700") {
+      width: 600px;
+      margin: 0 1rem;
+    }
   }
 }

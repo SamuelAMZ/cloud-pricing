@@ -1,7 +1,14 @@
-import React from "react";
+import ApiDoc from "../components/ApiDoc";
+import { MenuActiveProvider } from "../context/MenuActive";
 
 const Api = () => {
-  return <div>Coming soon</div>;
+  return (
+    <MenuActiveProvider>
+      <div className="about">
+        <ApiDoc />
+      </div>
+    </MenuActiveProvider>
+  );
 };
 
 export default Api;

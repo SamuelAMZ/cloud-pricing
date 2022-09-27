@@ -4,6 +4,7 @@ import { SiGooglecloud, SiOvh, SiVultr } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import ActiveProviderContext from "../../context/ActiveProvider";
 import DefaultStorageContext from "../../context/DefaultStorageType";
+import { TailSpin } from "react-loader-spinner";
 
 const Storage = ({ providerdata, trimData }) => {
   const { active } = useContext(ActiveProviderContext);
@@ -12,6 +13,7 @@ const Storage = ({ providerdata, trimData }) => {
   );
 
   const [activePrice, setActivePrice] = useState("");
+  const [dataLoading, setDataloading] = useState(false);
 
   // handle the displaying of a max of 5 data on the first load
   const [maxComp, setMaxComp] = useState(5);
@@ -68,13 +70,15 @@ const Storage = ({ providerdata, trimData }) => {
       setActivePrice("perho");
     }
   }, []);
-  // handling storage type
-  // useEffect(() => {
-  //   takeStorageType();
-  //   console.log(takeStorageType());
-  //   console.log(typeOfStorage);
-  //   console.log(defaultStorage);
-  // }, [typeOfStorage]);
+
+  // spin 1sec before data change
+  useEffect(() => {
+    setDataloading(true);
+
+    setTimeout(() => {
+      setDataloading(false);
+    }, 250);
+  }, [typeOfStorage, activePrice]);
 
   return (
     <div className="computer">
@@ -126,114 +130,137 @@ const Storage = ({ providerdata, trimData }) => {
         </div>
       </div>
 
-      <div className="data datastorage">
-        <div className="logo">
-          <p>Company</p>
-          {takeStorageType()
-            .slice(0, maxComp)
-            .map((data, id) => {
-              if (id === takeStorageType().length - 1) {
-                return;
-              }
-              return (
-                <p key={id}>
-                  {active.id === 1 && (
-                    <>
-                      <FaLinode /> <span> Linode</span>
-                    </>
-                  )}
-                  {active.id === 2 && (
-                    <>
-                      <FaAws /> <span> AWS</span>
-                    </>
-                  )}
-                  {active.id === 3 && (
-                    <>
-                      <SiGooglecloud />
-                      <span> GCP</span>
-                    </>
-                  )}
-                  {active.id === 4 && (
-                    <>
-                      <VscAzure />
-                      <span> Azure</span>
-                    </>
-                  )}
-                  {active.id === 5 && (
-                    <>
-                      <FaDigitalOcean />
-                      <span> DigitalO</span>
-                    </>
-                  )}
-                  {active.id === 6 && (
-                    <>
-                      <SiOvh />
-                      <span> OVH</span>
-                    </>
-                  )}
-                  {active.id === 7 && (
-                    <>
-                      <SiVultr />
-                      <span> Vultr</span>
-                    </>
-                  )}
-                </p>
-              );
-            })}
-        </div>
-        <div className="space">
-          <p>space</p>
-          {takeStorageType()
-            .slice(0, maxComp)
-            .map((data, id) => {
-              if (id === takeStorageType().length - 1) {
-                return;
-              }
-              return (
-                <p key={id}>
-                  {trimData(data.storage) +
-                    " " +
-                    takeStorageType()[takeStorageType().length - 1].size}
-                </p>
-              );
-            })}
-        </div>
-        <div className="price">
-          <p>Price</p>
-          {takeStorageType()
-            .slice(0, maxComp)
-            .map((data, id) => {
-              if (id === takeStorageType().length - 1) {
-                return;
-              }
-              return (
-                <p key={id}>
-                  {activePrice === "permo" &&
-                    trimData(data.pricePerMo) +
-                      " " +
-                      takeStorageType()[takeStorageType().length - 1].currency}
-                  {activePrice === "perho" &&
-                    data.pricePerHour +
-                      " " +
-                      takeStorageType()[takeStorageType().length - 1].currency}
-                </p>
-              );
-            })}
-        </div>
-      </div>
+      {dataLoading ? (
+        <TailSpin
+          height="50"
+          width="100%"
+          color="#2d05be"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      ) : (
+        <>
+          <div className="data datastorage">
+            <div className="logo">
+              <p>Company</p>
+              {takeStorageType()
+                .slice(0, maxComp)
+                .map((data, id) => {
+                  if (id === takeStorageType().length - 1) {
+                    return;
+                  }
+                  return (
+                    <p key={id}>
+                      {active.id === 1 && (
+                        <>
+                          <FaLinode /> <span> Linode</span>
+                        </>
+                      )}
+                      {active.id === 2 && (
+                        <>
+                          <FaAws /> <span> AWS</span>
+                        </>
+                      )}
+                      {active.id === 3 && (
+                        <>
+                          <SiGooglecloud />
+                          <span> GCP</span>
+                        </>
+                      )}
+                      {active.id === 4 && (
+                        <>
+                          <VscAzure />
+                          <span> Azure</span>
+                        </>
+                      )}
+                      {active.id === 5 && (
+                        <>
+                          <FaDigitalOcean />
+                          <span> DigitalO</span>
+                        </>
+                      )}
+                      {active.id === 6 && (
+                        <>
+                          <SiOvh />
+                          <span> OVH</span>
+                        </>
+                      )}
+                      {active.id === 7 && (
+                        <>
+                          <SiVultr />
+                          <span> Vultr</span>
+                        </>
+                      )}
+                    </p>
+                  );
+                })}
+            </div>
+            <div className="space">
+              <p>space</p>
+              {takeStorageType()
+                .slice(0, maxComp)
+                .map((data, id) => {
+                  if (id === takeStorageType().length - 1) {
+                    return;
+                  }
+                  return (
+                    <p key={id}>
+                      {trimData(data.storage) +
+                        " " +
+                        takeStorageType()[takeStorageType().length - 1].size}
+                    </p>
+                  );
+                })}
+            </div>
+            <div className="price">
+              <p>Price</p>
+              {takeStorageType()
+                .slice(0, maxComp)
+                .map((data, id) => {
+                  if (id === takeStorageType().length - 1) {
+                    return;
+                  }
+                  return (
+                    <p key={id}>
+                      {activePrice === "permo" &&
+                        trimData(data.pricePerMo) +
+                          " " +
+                          takeStorageType()[takeStorageType().length - 1]
+                            .currency}
+                      {activePrice === "perho" &&
+                        data.pricePerHour +
+                          " " +
+                          takeStorageType()[takeStorageType().length - 1]
+                            .currency}
+                    </p>
+                  );
+                })}
+            </div>
+          </div>
 
-      <div className="next-actions">
-        {maxComp > 5 && (
-          <button onClick={() => setMaxComp(5)}>Less data</button>
-        )}
-        {checkAndRemoveActions() && (
-          <>
-            <button onClick={() => setMaxComp(maxComp + 5)}>Next 5 data</button>
-            <button onClick={() => setMaxComp(maxComp + 50)}>Next 50</button>
-          </>
-        )}
-        {!checkAndRemoveActions() && <p>You have everything!</p>}
-      </div>
+          <div className="next-actions">
+            {maxComp > 5 && (
+              <button className="less" onClick={() => setMaxComp(5)}>
+                Less data
+              </button>
+            )}
+            {checkAndRemoveActions() && (
+              <>
+                <button onClick={() => setMaxComp(maxComp + 5)}>
+                  Next 5 data
+                </button>
+                <button onClick={() => setMaxComp(maxComp + 50)}>
+                  Next 50
+                </button>
+              </>
+            )}
+            {!checkAndRemoveActions() && <p>You have everything!</p>}
+          </div>
+        </>
+      )}
     </div>
   );
 };

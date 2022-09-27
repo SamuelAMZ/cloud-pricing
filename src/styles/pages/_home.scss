@@ -1,3 +1,4 @@
+@use "../global/breakpoints" as b;
 @import "../global/variables";
 
 .container {
@@ -5,4 +6,9 @@
   grid-template-columns: 1fr 2fr;
   margin: 1rem;
   height: 95vh;
+
+  @include b.breakpoint("1150") {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
 }

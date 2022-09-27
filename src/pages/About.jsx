@@ -1,7 +1,14 @@
-import React from "react";
+import AboutInfo from "../components/AboutInfo";
+import { MenuActiveProvider } from "../context/MenuActive";
 
 const About = () => {
-  return <div>About</div>;
+  return (
+    <MenuActiveProvider>
+      <div className="about">
+        <AboutInfo />
+      </div>
+    </MenuActiveProvider>
+  );
 };
 
 export default About;

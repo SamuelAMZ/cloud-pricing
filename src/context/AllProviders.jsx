@@ -101,13 +101,13 @@ export const AllProvidersProvider = ({ children }) => {
         compute: true,
         database: true,
         storage: true,
-        networking: false,
+        networking: true,
       },
       pricePerHo: {
         compute: true,
         database: false,
         storage: false,
-        networking: true,
+        networking: false,
       },
     },
     {
